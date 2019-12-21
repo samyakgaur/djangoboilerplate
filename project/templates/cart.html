@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% block content %}
+    <br>
+    {{ form.media.css }}
+    {{ form.media.js }}
+    <div class="container" style="border:1px solid #cecece;padding: 20px;">
+        <form method="post" action="">
+                {% csrf_token %}
+                {{ form.as_p }}
+            <button type="submit" class="btn btn-primary">Add to Cart</button>
+        </form>
+        <br>
+        <table class="table table-dark thead-light ">
+            <tr>
+                <th scope="col">Billing By</th scope="col">
+                    <th scope="col">Customer Name</th>
+                    <th scope="col">Note</th>
+                    <th scope="col">Item Name</th>
+                    <th scope="col">Item Price</th>
+                    <th scope="col">Item Quantity</th>
+                    <th scope="col">Actions</th>
+                </tr>
+                {% for cart in cart %}
+                <tr> 
+                    <td>{{ cart.user.get_full_name}}</td>
+                    <td>{{ cart.name}}</td>
+                    <td>{{ cart.paragraph}}</td>
+                    <td>{{ cart.item.item_name }}</td>
+                    <td>₹ {{ cart.item.price }}</td>
+                    <td>{{ cart.cart_quantity }}</td>
+                    <td><a href="{% url 'delete_cart' cart.pk %}" class="btn btn-danger btn-sm" role="button" aria-pressed="true" > delete</a></td>
+                </tr>
+                {% endfor %}
+            </table>
+            <button class="btn btn-primary" href="#" style="float: right;">
+                <a style="color:white"  href="{% url 'add_item' %}" >Add Product</a>
+            </button>
+            <br>
+    </div>
+{% endblock %}

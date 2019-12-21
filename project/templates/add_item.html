@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load crispy_forms_tags %}
+<br>
+<div class="container">
+  <form method="post" action="">
+    {% csrf_token %}
+    {{ form_item|crispy }}
+    <button type="submit" class="btn btn-primary">Add Item</button>
+  </form>
+  <br>
+  <table class="table table-dark thead-light ">
+    <tr>
+      <th scope="col">Id</th>
+        <th scope="col">Item Name</th scope="col">
+        <th scope="col">Price</th>
+        <th scope="col">Quantity</th>
+        <th scope="col">update</th>
+        <th scope="col">delete</th>
+    </tr>
+    {% for items in items %}
+    <tr> 
+      <td>{{ items.id }}</td>
+        <td>{{ items.item_name }}</td>
+        <td>₹ {{ items.price }}</td>
+        <td>{{ items.quantity }}</td>
+        <td><a href="{% url 'update_item' items.pk %}" class="btn btn-warning btn-sm" role="button" aria-pressed="true" > update</a></td>
+        <td><a href="{% url 'delete_item' items.pk %}" class="btn btn-danger btn-sm" role="button" aria-pressed="true" > delete</a></td>
+    </tr>
+    {% endfor %}
+    </table>
+    
+</div>
+{% endblock %}

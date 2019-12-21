@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load crispy_forms_tags %}
+    <br>
+    <center><h3>Add customer !</h3></center>
+    <hr>
+    <div class="container" style="border:1px solid #cecece;padding: 20px;">
+        <form method="post" action="">
+                {% csrf_token %}
+                {{ form_item|crispy }}
+            <button type="submit" class="btn btn-primary">Add User</button>
+        </form>
+        <br>
+        <table class="table table-dark thead-light ">
+            <tr>
+                <th scope="col">Customer Name</th scope="col">
+                    <th scope="col">Phone Number</th>
+                    <th scope="col">Address 1</th>
+                    <th scope="col">Address 2</th>
+                    <th scope="col">Address 3</th>
+                    <th scope="col">City</th>
+                    <th scope="col">Email</th>
+                </tr>
+                {% for customer in customer %}
+                <tr> 
+                    <td>{{ customer.customer_name}}</td>
+                    <td>{{ customer.phone_number}}</td>
+                    <td>{{ customer.address1}}</td>
+                    <td>{{ customer.address2}}</td>
+                    <td>{{ customer.address3}}</td>
+                    <td>{{ customer.city }}</td>
+                    <td>{{ customer.email }}</td>
+                </tr>
+                {% endfor %}
+            </table>
+            <button class="btn btn-primary" href="#" style="float: right;">
+                <a style="color:white"  href="{% url 'add_item' %}" >Add Product</a>
+            </button>
+            <br>
+    </div>
+{% endblock %}

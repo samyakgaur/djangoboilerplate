@@ -1,0 +1,12 @@
+{% if customers.count > 0 %}
+    
+    {% for customers in customers %}
+                    
+        <p><a href="/cart/customer_id/{{ customers.id }}">{{ customers.customer_name }}</a></p>
+    {% endfor %}
+    
+    {% else %}
+        <li>Customer not registered</li>
+        <a href="{% url 'customer_add' %}" class="btn btn-secondary btn-sm active" role="button" aria-pressed="true">Add Customer</a>
+
+{% endif %}

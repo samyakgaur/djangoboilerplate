@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container">
+    <br>
+    <center>
+    <table>
+        <tr>Customer Search: </tr>
+        {% csrf_token %}    
+        <input type="text" id="search" name="search"><hr>   
+        <th id="search-results">
+        </th>
+    </table></center>
+    <div style="text-align: end!important;">
+        First Visit ?
+        <a href="{% url 'customer_add' %}" class="btn btn-secondary btn-sm active" role="button" aria-pressed="true">Add Customer</a>
+    </div>    
+</div>
+{% endblock %}
